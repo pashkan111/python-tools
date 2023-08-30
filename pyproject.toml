@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "python-tools"
+version = "0.1.0"
+description = ""
+authors = ["p_kozhevnikov <p.kozhevnikov@cian.ru>"]
+readme = "README.md"
+packages = [{include = "python_tools"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+asyncpg = "^0.28.0"
+sqlalchemy = "^2.0.20"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
