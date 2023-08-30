@@ -10,6 +10,7 @@ packages = [{include = "python_tools"}]
 python = "^3.11"
 asyncpg = "^0.28.0"
 sqlalchemy = "^2.0.20"
+wheel = "^0.41.2"
 
 
 [build-system]

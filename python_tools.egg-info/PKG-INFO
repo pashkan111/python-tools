@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: python-tools
+Version: 0.0.1
+Summary: Lib for using postgres and functional tests
+Author: pashkan111
+Requires-Python: >=3.10
