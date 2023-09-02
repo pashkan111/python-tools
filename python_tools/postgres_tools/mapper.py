@@ -1,27 +1,17 @@
 from asyncpg import Record
-from dataclasses import dataclass, is_dataclass
 from typing import TypeVar
 
 
-DC = TypeVar('DC')
+T = TypeVar('T')
 
 
-@dataclass
-class Entity:
-    id: int
-    name: str
-
-
-def _map_record(entity: type[DC], db_record: Record) -> DC:
+def _map_record(entity: type[T], db_record: Record) -> T:
     d = dict(db_record.items())
     res = entity(**d)
     return res
 
 
-def map_entity(entity: type[DC], db_records: Record | list[Record]) -> DC | list[DC]:
-    if not is_dataclass(entity):
-        raise Exception
-    
+def map_entity(entity: type[T], db_records: Record | list[Record]) -> T | list[T]:
     if not isinstance(db_records, list):
         return _map_record(entity, db_records)
 
