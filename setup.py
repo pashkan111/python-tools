@@ -9,5 +9,11 @@ setup(
     description='Lib for using postgres and functional tests',
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["asyncpg", "sqlalchemy"],
+    install_requires=[
+        "asyncpg", 
+        "sqlalchemy", 
+        "pytest", 
+        "faker", 
+        "pytest-asyncio>=0.17"
+    ],
 )

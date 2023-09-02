@@ -1,2 +1,5 @@
 asyncpg
 sqlalchemy
+pytest
+faker
+pytest-asyncio>=0.17
