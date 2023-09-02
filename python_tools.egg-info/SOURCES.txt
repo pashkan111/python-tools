@@ -10,3 +10,6 @@ python_tools/postgres_tools/__init__.py
 python_tools/postgres_tools/compiler.py
 python_tools/postgres_tools/mapper.py
 python_tools/postgres_tools/pg.py
+python_tools/pytest_tools/__init__.py
+python_tools/pytest_tools/conftest.py
+python_tools/pytest_tools/tools.py
