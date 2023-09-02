@@ -11,6 +11,9 @@ python = "^3.11"
 asyncpg = "^0.28.0"
 sqlalchemy = "^2.0.20"
 wheel = "^0.41.2"
+pytest-asyncio = "^0.21.1"
+faker = "^19.3.1"
+pytest = "^7.4.1"
 
 
 [build-system]
