@@ -24,7 +24,7 @@ async def pg(pool: PostgresConnection) -> AsyncGenerator[PostgresConnection, Non
 
 @pytest_asyncio.fixture
 async def pool() -> PostgresConnection:
-    db_config = importlib.import_module('storage.db_config')
+    db_config = importlib.import_module('database.db_config')
     pg = db_config.pg
     await pg.create_pool()
     return pg.get()
