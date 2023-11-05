@@ -1,7 +1,8 @@
 import asyncpg
 from typing import AsyncIterator, Any
 from contextlib import asynccontextmanager
-
+from asyncpg.transaction import Transaction
+from typing import AsyncGenerator
 
 class PostgresConnection:
     def __init__(self, pool: asyncpg.Pool):
@@ -30,14 +31,13 @@ class PostgresConnection:
         async with self._connection() as conn:
             return await conn.fetchval(query, *args)
 
-    async def execute(self, command: str, *args, **kwargs) -> None:
+    async def execute(self, command: str, *args, **kwargs) -> Any:
         async with self._connection() as conn:
-            await conn.execute(command, *args)
+            return await conn.execute(command, *args)
 
-    async def transaction(self, isolation: str = 'read_committed'):
+    async def transaction(self, isolation: str = 'read_committed') -> AsyncGenerator[Transaction, Any]:
         async with self._connection() as conn:
-            async with conn.transaction(isolation=isolation):
-                yield
+            yield conn.transaction()
 
 
 class Pg:
