@@ -15,21 +15,19 @@ class EnvVariables(TypedDict):
     db_config_path: str
 
 
-@pytest.fixture(scope="session")
-def environ_variables() -> EnvVariables:
-    return EnvVariables(
-        db_schema_path='database/schema.sql',
-        db_drop_schema_path='database/drop_schema.sql',
-        db_config_path='database.db_config'
-    )
+DEFAULT_DB = EnvVariables(
+    db_schema_path='database/schema.sql',
+    db_drop_schema_path='database/drop_schema.sql',
+    db_config_path='database.db_config'
+)
 
 
 @pytest.hookimpl(tryfirst=True)
-def pytest_sessionstart(session, environ_variables: EnvVariables):
+def pytest_sessionstart(session):
     os.environ['ENVIRON'] = 'test'
-    os.environ['DB_SCHEMA'] = environ_variables['db_schema_path']
-    os.environ['DB_DROP_SCHEMA'] = environ_variables['db_drop_schema_path']
-    os.environ['DB_CONFIG'] = environ_variables['db_config_path']
+    os.environ['DB_SCHEMA'] = DEFAULT_DB['db_schema_path']
+    os.environ['DB_DROP_SCHEMA'] = DEFAULT_DB['db_drop_schema_path']
+    os.environ['DB_CONFIG'] = DEFAULT_DB['db_config_path']
 
 
 @pytest_asyncio.fixture
