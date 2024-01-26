@@ -2,7 +2,7 @@ from asyncpg import Record
 from typing import TypeVar
 
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def _map_record(entity: type[T], db_record: Record) -> T:
@@ -18,7 +18,5 @@ def map_entity(entity: type[T], db_records: Record | list[Record]) -> T | list[T
     entities = []
     for db_record in db_records:
         entities.append(_map_record(entity, db_record))
-    
+
     return entities
-
-
