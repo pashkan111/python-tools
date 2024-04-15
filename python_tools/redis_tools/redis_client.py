@@ -47,9 +47,7 @@ class RedisClient:
         self._url = url
 
     def create_pool(self):
-        pool = redis.ConnectionPool.from_url(
-            self._url, max_connections=10, encoding="utf-8", decode_responses=True
-        )
+        pool = redis.ConnectionPool.from_url(self._url, max_connections=10, encoding="utf-8", decode_responses=True)
         client = redis.Redis.from_pool(pool)
         self._conn = RedisConnection(client)
 
