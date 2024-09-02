@@ -20,28 +20,36 @@ class PostgresConnection:
     async def _close_pool(self):
         await self.pool.close()
 
-    async def fetch(self, *, query: str, conn: asyncpg.Connection | None = None, args: list[Any] | None = None, **kwargs) -> list[asyncpg.Record]:
+    async def fetch(
+        self, *, query: str, conn: asyncpg.Connection | None = None, args: list[Any] | None = None, **kwargs
+    ) -> list[asyncpg.Record]:
         args = args or []
         if conn:
             return await conn.fetch(query, *args)
         async with self._connection() as conn:
             return await conn.fetch(query, *args)
 
-    async def fetchrow(self, *, query: str, conn: asyncpg.Connection | None = None, args: list[Any] | None = None, **kwargs) -> asyncpg.Record | None:
+    async def fetchrow(
+        self, *, query: str, conn: asyncpg.Connection | None = None, args: list[Any] | None = None, **kwargs
+    ) -> asyncpg.Record | None:
         args = args or []
         if conn:
             return await conn.fetchrow(query, *args)
         async with self._connection() as conn:
             return await conn.fetchrow(query, *args)
 
-    async def fetchval(self, *, query: str, conn: asyncpg.Connection | None = None, args: list[Any] | None = None, **kwargs) -> Any:
+    async def fetchval(
+        self, *, query: str, conn: asyncpg.Connection | None = None, args: list[Any] | None = None, **kwargs
+    ) -> Any:
         args = args or []
         if conn:
             return await conn.fetchval(query, *args)
         async with self._connection() as conn:
             return await conn.fetchval(query, *args)
 
-    async def execute(self, *, command: str, conn: asyncpg.Connection | None = None, args: list[Any] | None = None, **kwargs) -> Any:
+    async def execute(
+        self, *, command: str, conn: asyncpg.Connection | None = None, args: list[Any] | None = None, **kwargs
+    ) -> Any:
         args = args or []
         if conn:
             return await conn.execute(command, *args)

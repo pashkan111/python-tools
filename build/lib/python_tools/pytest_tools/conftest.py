@@ -1,5 +1,6 @@
 import pytest
 import os
+import asyncio
 import pytest_asyncio
 from python_tools.postgres_tools import PostgresConnection
 from python_tools.redis_tools import RedisConnection
@@ -66,3 +67,11 @@ async def redis() -> AsyncGenerator[RedisConnection, None]:
     yield client
     await client.execute_command("FLUSHDB")
     await client._redis.close()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def event_loop():
+    """Create an instance of the default event loop for each test session."""
+    loop = asyncio.new_event_loop()
+    yield loop
+    loop.close()

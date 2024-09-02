@@ -13,9 +13,7 @@ from sqlalchemy.util import immutabledict
 _dialect: PGDialect_asyncpg = postgresql.asyncpg.dialect()
 
 
-def _get_default_values(
-    statement: ClauseElement, compiled: PGCompiler
-) -> dict[str, Any]:
+def _get_default_values(statement: ClauseElement, compiled: PGCompiler) -> dict[str, Any]:
     """
     Возвращает дефолтные значения для параметров запроса вставки/обновления
     """
@@ -29,9 +27,7 @@ def _get_default_values(
 
     # Переданные аргументы в statement
     _values = cast(immutabledict, statement._values)
-    statement_values: frozenset[str] = (
-        frozenset(_values.keys()) if _values else frozenset()
-    )
+    statement_values: frozenset[str] = frozenset(_values.keys()) if _values else frozenset()
 
     params: dict[str, Any] = {}
 
